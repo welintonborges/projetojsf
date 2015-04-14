@@ -1,0 +1,33 @@
+
+
+
+@FaceConverter(forClass = Pessoa.calss)
+public class PessoaConverter implements Converter{
+
+@Override
+public Object getAsObject(FaceContext context, UIComponent , String value){
+
+Pessoa retorno = null;
+
+EntityManager manager = JpaUtil.getEntityManager();
+
+try{
+
+if(value != null){
+Pessoas pessoas = new Pessoas(manager);
+retorno = pessoas.porId(new Log(value));
+
+}
+return retorno
+}finally{
+manger.close();
+}
+}
+@Override
+public String getAsString(FacesContext context,
+UIComponent component, Object value) {
+if (value != null) {
+return ((Pessoa) value).getId().toString();
+}
+return null;
+}
